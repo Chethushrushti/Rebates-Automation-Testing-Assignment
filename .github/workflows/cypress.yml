@@ -1,0 +1,56 @@
+name: Run Cypress Tests on Windows and Ubuntu
+
+on:
+  push:
+    branches:
+      - master  # masterブランチへのプッシュでトリガー
+  pull_request:
+    branches:
+      - master  # masterブランチへのプルリクエストでトリガー
+
+jobs:
+  # Windows環境でCypressテストを実行
+  cypress-run-windows:
+    runs-on: windows-latest  # Windows環境を使用
+
+    steps:
+      # リポジトリコードをチェックアウト
+      - name: リポジトリコードのチェックアウト
+        uses: actions/checkout@v2
+
+      # Node.jsのセットアップ
+      - name: Node.jsのセットアップ
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Node.jsのバージョンを指定
+
+      # 依存関係のインストール
+      - name: 依存関係のインストール
+        run: npm install
+
+      # Cypressテストを実行
+      - name: Cypressテストの実行
+        run: npx cypress run
+
+  # Ubuntu環境でCypressテストを実行
+  cypress-run-ubuntu:
+    runs-on: ubuntu-latest  # Ubuntu環境を使用
+
+    steps:
+      # リポジトリコードをチェックアウト
+      - name: リポジトリコードのチェックアウト
+        uses: actions/checkout@v2
+
+      # Node.jsのセットアップ
+      - name: Node.jsのセットアップ
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Node.jsのバージョンを指定
+
+      # 依存関係のインストール
+      - name: 依存関係のインストール
+        run: npm install
+
+      # Cypressテストを実行
+      - name: Cypressテストの実行
+        run: npx cypress run
